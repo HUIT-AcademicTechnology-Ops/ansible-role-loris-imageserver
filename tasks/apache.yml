@@ -26,24 +26,29 @@
   command: apache2ctl configtest
   register: result
   ignore_errors: true
+  tags: apache
 
 - name: rolling back - restoring old default virtualhost
   command: a2ensite 000-default
   when: result is failed
+  tags: ["apache", "rollback"]
 
 - name: rolling back - disabling apache config
   command: a2dissite loris
   when: result is failed
+  tags: ["apache", "rollback"]
 
 - name: rolling back - ending playbook
   fail:
     msg: "Apache virtual host config is not valid. Please check before re-running the playbook."
   when: result is failed
+  tags: ["apache", "rollback"]
 
 - name: deactivate the default virtualhosts
   command: "a2dissite {{ item }}"
   with_items:
     - 000-default
     - default-ssl
+  tags: apache
   notify:
     - restart apache

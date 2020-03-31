@@ -58,11 +58,11 @@
     mode: "u=rwX,g=rX,o=rX"
     recurse: true
   with_items:
-    - /usr/local/share/images
+    - /usr/local/share/images/loris
     - /var/log/loris2
     - /var/cache/loris
     - /tmp/loris2
-  tags: file_permissions
+  tags: loris_file_permissions
 
 - name: ensure loris has read access to www files
   file:
@@ -73,4 +73,4 @@
     recurse: true
   with_items:
     - /var/www/loris2
-  tags: file_permissions
+  tags: loris_file_permissions

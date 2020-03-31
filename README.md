@@ -48,16 +48,14 @@ Run Ansible:
 
 To test:
 
-- Add an image to `/usr/local/share/images/` 
+- Add an image to `/usr/local/share/images/loris` 
 - Access image info.json at http://127.0.0.1/loris/myimage.jpg/info.json
 - Access image at http://127.0.0.1/loris/myimage.jpg/full/full/0/default.jpg
 
-License
--------
+## License
 
 MIT/BSD
 
-Author Information
-------------------
+## Author Information
 
 This role was created in 2020 by Arthur Barrett as a member of the Harvard University IT Academic Technology group.
