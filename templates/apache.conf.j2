@@ -35,7 +35,7 @@
     
     WSGIDaemonProcess loris2 user=loris group=loris processes=10 threads=15 maximum-requests=10000
     WSGIProcessGroup loris2
-    WSGIScriptAlias /{{ loris_prefix | default("loris") }} /var/www/loris2/loris2.wsgi
+    WSGIScriptAlias /loris /var/www/loris2/loris2.wsgi
 
     # Fix for mirador, which makes requests for "native" quality images per IIIF 1.1, 
     # but IIIF 2.0 changes "native" to "default". We're running loris (IIIF 2.0), so
@@ -43,5 +43,9 @@
     # "native" to "default" when the request comes in.
     RewriteEngine On
     RewriteRule ^(.*)native(.+)$ $1default$2 [R=301,L]
+
+    # Ensure URL request includes image identifier after the loris prefix, otherwise
+    # redirect to the root to prevent any errors.
+    RewriteRule ^/loris/?$ / [R=301,L]
 
 </VirtualHost>
