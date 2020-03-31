@@ -1,0 +1,76 @@
+---
+- name: clone repository
+  git:
+    repo: "{{ loris_repo }}"
+    update: yes
+    clone: yes
+    force: yes
+    version: "{{ loris_version }}"
+    dest: /opt/loris
+  tags: git
+
+# - name: run setup.py
+#   command: "/usr/bin/python3 setup.py install"
+#   args:
+#     chdir: /opt/loris
+
+- name: pip install loris 
+  pip:
+    name: "/opt/loris"
+    editable: no
+    extra_args: "--upgrade"
+  register: loris_updated
+  tags: pip
+
+- name: ensure document root exists
+  file:
+    path: /var/www/loris2/public
+    state: directory
+  tags: loris_files
+
+- name: copy www files to document root
+  copy:
+    remote_src: yes
+    src: "/opt/loris/www/{{ item }}"
+    dest: /var/www/loris2/public/
+  with_items:
+    - index.txt
+    - icons/favicon.ico
+  tags: loris_files
+
+- name: copy loris2.wsgi
+  copy:
+    src: files/www/loris2/
+    dest: /var/www/loris2/
+  tags: loris_files
+
+- name: copy loris2.conf
+  copy:
+    src: files/etc/loris2/
+    dest: /etc/loris2/
+  tags: loris_files
+
+- name: ensure loris has write access to images, logs, and cache
+  file:
+    path: "{{ item }}"
+    owner: loris
+    group: loris
+    mode: "u=rwX,g=rX,o=rX"
+    recurse: true
+  with_items:
+    - /usr/local/share/images
+    - /var/log/loris2
+    - /var/cache/loris
+    - /tmp/loris2
+  tags: file_permissions
+
+- name: ensure loris has read access to www files
+  file:
+    path: "{{ item }}"
+    owner: loris
+    group: loris
+    mode: "u=rX,g=rX,o=rX"
+    recurse: true
+  with_items:
+    - /var/www/loris2
+  tags: file_permissions

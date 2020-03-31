@@ -1,0 +1,14 @@
+galaxy_info:
+  author: Arthur Barrett
+  description: Installs and configures the Loris Image Server on Linux-based OS
+  company: HUIT Academic Technology at Harvard University
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.0
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+  galaxy_tags:
+    - loris
+    - imageserver
+    - iiif
