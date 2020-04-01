@@ -9,13 +9,14 @@ Installs and configures the [Loris Image Server](https://github.com/loris-images
 
 ## Role Variables
 
-| parameter     | required | default                                        | comments                              |
-|---------------|----------|------------------------------------------------|---------------------------------------|
-| loris_repo    | no       | https://github.com/loris-imageserver/loris.git | Loris git repository                  |
-| loris_version | no       | v3.0.0                                         | Git tag, branch, or commit to use     |
-| loris_port    | no       | 80                                             | Server port                           |
-| loris_prefix  | no       | loris                                          | Server prefix for IIIF image requests |
-
+| parameter       | required | default                                        | comments                           |
+|-----------------|----------|------------------------------------------------|------------------------------------|
+| loris_repo      | no       | https://github.com/loris-imageserver/loris.git | Loris git repository               |
+| loris_version   | no       | v3.0.0                                         | Git tag, branch, or commit to use  |
+| loris_port      | no       | 80                                             | Server port for virtual host       |
+| loris_host      | no       |                                                | Server name for virtual host       |
+| loris_prefix    | no       | loris                                          | URI prefix for IIIF image requests |
+| loris_log_level | no       | INFO                                           | Loris log level                    |
 
 ## Dependencies
 

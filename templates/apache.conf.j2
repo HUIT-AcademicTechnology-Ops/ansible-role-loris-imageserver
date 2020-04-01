@@ -7,8 +7,9 @@
     # value is not decisive as it is used as a last resort host regardless.
     # However, you must set it for any further virtual host explicitly.
     #ServerName www.example.com
+    {% if loris_host %}ServerName {{ loris_host }}{% endif %}
 
-    ServerAdmin webmaster@localhost
+    ServerAdmin {{ loris_admin | default('webmaster@localhost', true) }}
     DocumentRoot /var/www/loris2/public
     DirectoryIndex index.html index.txt
 
@@ -47,5 +48,8 @@
     # Ensure URL request includes image identifier after the loris prefix, otherwise
     # redirect to the root to prevent any errors.
     RewriteRule ^/loris/?$ / [R=301,L]
+
+    # Tell apache we're on HTTPS if reverse proxy is serving the site using SSL
+    SetEnvIf X-Forwarded-Proto "https" HTTPS=on
 
 </VirtualHost>
