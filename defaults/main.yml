@@ -1,5 +1,5 @@
 ---
-loris_version: v3.0.0
+loris_version: v3.1.0
 loris_repo: https://github.com/loris-imageserver/loris.git
 loris_port: 80
 loris_host: ""

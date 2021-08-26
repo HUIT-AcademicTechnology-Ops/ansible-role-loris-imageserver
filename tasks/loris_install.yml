@@ -31,11 +31,10 @@
 - name: copy www files to document root
   copy:
     remote_src: yes
-    src: "/opt/loris/www/{{ item }}"
+    src: "{{ item }}"
     dest: /var/www/loris2/public/
-  with_items:
-    - index.txt
-    - icons/favicon.ico
+  with_fileglob:
+    - /opt/loris/loris/data/www/*
   tags: loris_files
 
 - name: copy loris2.wsgi
