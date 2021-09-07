@@ -8,3 +8,4 @@ loris_prefix: loris # URI path prefix before the image identifier
 loris_log_level: INFO # DEBUG|INFO|WARNING|ERROR|CRITICAL
 loris_log_max_size: 52428800 # 50 MB
 loris_log_max_backups: 5
+loris_block_robots: yes

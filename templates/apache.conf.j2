@@ -52,7 +52,8 @@
     # Tell apache we're on HTTPS if reverse proxy is serving the site using SSL
     SetEnvIf X-Forwarded-Proto "https" HTTPS=on
 
-    # Block a few common web crawlers
+    {% if loris_block_robots %}
+    # Block common web crawlers from overloading loris
     BrowserMatchNoCase Googlebot is_robot
     BrowserMatchNoCase bingbot is_robot
     BrowserMatchNoCase SemrushBot is_robot
@@ -62,5 +63,6 @@
         allow from all
         deny from env=is_robot
     </Location>
+    {% endif %}
 
 </VirtualHost>
