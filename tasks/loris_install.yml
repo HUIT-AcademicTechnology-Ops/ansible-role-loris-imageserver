@@ -37,9 +37,16 @@
     - /opt/loris/loris/data/www/*
   tags: loris_files
 
+- name: copy robots.txt
+  copy:
+    src: files/www/loris2/robots.txt
+    dest: /var/www/loris2/public/
+  tags: loris_files
+  when: loris_block_robots
+
 - name: copy loris2.wsgi
   copy:
-    src: files/www/loris2/
+    src: files/www/loris2/loris2.wsgi
     dest: /var/www/loris2/
   tags: loris_files
 
