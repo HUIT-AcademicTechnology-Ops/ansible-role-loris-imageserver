@@ -17,7 +17,8 @@
     # error, crit, alert, emerg.
     # It is also possible to configure the loglevel for particular
     # modules, e.g.
-    #LogLevel info ssl:warn
+    #LogLevel info ssl:warn wsgi:debug
+    LogLevel {{ apache_log_level }}
 
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -34,7 +35,7 @@
 
     AllowEncodedSlashes On
     
-    WSGIDaemonProcess loris2 user=loris group=loris processes=10 threads=15 maximum-requests=10000
+    WSGIDaemonProcess loris2 user=loris group=loris processes={{ wsgi_processes }} threads={{ wsgi_threads }} maximum-requests={{ wsgi_maximum_requests }} graceful-timeout={{ wsgi_graceful_timeout }} restart-interval={{ wsgi_restart_interval }}
     WSGIProcessGroup loris2
     WSGIScriptAlias /loris /var/www/loris2/loris2.wsgi
 

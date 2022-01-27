@@ -9,3 +9,9 @@ loris_log_level: INFO # DEBUG|INFO|WARNING|ERROR|CRITICAL
 loris_log_max_size: 52428800 # 50 MB
 loris_log_max_backups: 5
 loris_block_robots: yes
+wsgi_processes: 10
+wsgi_threads: 15
+wsgi_maximum_requests: 1000
+wsgi_graceful_timeout: 30
+wsgi_restart_interval: 86400
+apache_log_level: 'info'
