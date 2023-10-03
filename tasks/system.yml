@@ -24,6 +24,10 @@
       - libwebp-dev
   tags: apt
 
+- name : Update all packages
+  apt: name="*" state=latest update_cache=true force_apt_get=true
+  tags: apt
+
 - name: create loris group
   group:
     name: loris
