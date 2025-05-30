@@ -1,5 +1,5 @@
 ---
-- include: system.yml
-- include: apache.yml
-- include: loris_install.yml
-- include: loris_config.yml
+- import_tasks: system.yml
+- import_tasks: apache.yml
+- import_tasks: loris_install.yml
+- import_tasks: loris_config.yml
