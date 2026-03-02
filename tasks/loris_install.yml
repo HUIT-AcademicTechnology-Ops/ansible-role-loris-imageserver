@@ -14,11 +14,13 @@
 #   args:
 #     chdir: /opt/loris
 
-- name: pip install loris 
+- name: pip install loris
   pip:
     name: "/opt/loris"
     editable: no
     extra_args: "--upgrade"
+    virtualenv: "{{ loris_venv_path }}"
+    virtualenv_command: python3 -m venv
   register: loris_updated
   tags: pip
 

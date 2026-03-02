@@ -35,7 +35,7 @@
 
     AllowEncodedSlashes On
     
-    WSGIDaemonProcess loris2 user=loris group=loris processes={{ wsgi_processes }} threads={{ wsgi_threads }} maximum-requests={{ wsgi_maximum_requests }} graceful-timeout={{ wsgi_graceful_timeout }} restart-interval={{ wsgi_restart_interval }}
+    WSGIDaemonProcess loris2 user=loris group=loris processes={{ wsgi_processes }} threads={{ wsgi_threads }} maximum-requests={{ wsgi_maximum_requests }} graceful-timeout={{ wsgi_graceful_timeout }} restart-interval={{ wsgi_restart_interval }} python-home={{ loris_venv_path }}
     WSGIProcessGroup loris2
     WSGIScriptAlias /loris /var/www/loris2/loris2.wsgi
 
