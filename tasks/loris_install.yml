@@ -24,6 +24,14 @@
   register: loris_updated
   tags: pip
 
+- name: upgrade urllib3 in loris venv
+  pip:
+    name: "urllib3>=1.26"
+    extra_args: "--upgrade"
+    virtualenv: "{{ loris_venv_path }}"
+    virtualenv_command: python3 -m venv
+  tags: pip
+
 - name: ensure document root exists
   file:
     path: /var/www/loris2/public
