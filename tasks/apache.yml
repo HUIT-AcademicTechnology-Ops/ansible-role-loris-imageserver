@@ -4,6 +4,23 @@
     name: ["apache2", "libapache2-mod-wsgi-py3"]
   tags: apt
 
+- name: create apache2 systemd override directory
+  file:
+    path: /etc/systemd/system/apache2.service.d
+    state: directory
+    mode: '0755'
+  tags: apache
+
+- name: set apache2 systemd restart policy to on-failure
+  template:
+    src: apache2-restart.conf.j2
+    dest: /etc/systemd/system/apache2.service.d/restart.conf
+    mode: '0644'
+  notify:
+    - reload systemd
+    - restart apache
+  tags: apache
+
 - name: enable apach2e modules
   apache2_module:
     state: present

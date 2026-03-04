@@ -1,4 +1,8 @@
 ---
+- name: reload systemd
+  systemd:
+    daemon_reload: yes
+
 - name: restart apache
   service:
     name: apache2
