@@ -14,12 +14,22 @@
 #   args:
 #     chdir: /opt/loris
 
-- name: pip install loris 
+- name: pip install loris
   pip:
     name: "/opt/loris"
     editable: no
     extra_args: "--upgrade"
+    virtualenv: "{{ loris_venv_path }}"
+    virtualenv_command: python3 -m venv
   register: loris_updated
+  tags: pip
+
+- name: upgrade urllib3 in loris venv
+  pip:
+    name: "urllib3>=1.26"
+    extra_args: "--upgrade"
+    virtualenv: "{{ loris_venv_path }}"
+    virtualenv_command: python3 -m venv
   tags: pip
 
 - name: ensure document root exists
